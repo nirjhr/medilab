@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anti-Doping Education Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(to right, #2c3e50, #4a6491);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .wada-logo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .quiz-container {
+            padding: 30px;
+        }
+
+        .progress-container {
+            margin-bottom: 30px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .progress-bar {
+            background: #ecf0f1;
+            height: 12px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress {
+            background: linear-gradient(to right, #27ae60, #2ecc71);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .question-container {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+            border-left: 5px solid #3498db;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .options-container {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            background: #e9ecef;
+            border-color: #adb5bd;
+            transform: translateY(-2px);
+        }
+
+        .option.selected {
+            background: #3498db;
+            color: white;
+            border-color: #2980b9;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .option.correct {
+            background: #27ae60;
+            color: white;
+            border-color: #219a52;
+        }
+
+        .option.incorrect {
+            background: #e74c3c;
+            color: white;
+            border-color: #c0392b;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 30px;
+            height: 30px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .selected .option-letter, .correct .option-letter, .incorrect .option-letter {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .explanation {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid #3498db;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-prev {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .btn-prev:hover:not(:disabled) {
+            background: #7f8c8d;
+        }
+
+        .btn-next {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-next:hover:not(:disabled) {
+            background: #2980b9;
+        }
+
+        .btn-submit {
+            background: #27ae60;
+            color: white;
+        }
+
+        .btn-submit:hover {
+            background: #219a52;
+        }
+
+        button:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Popup Styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .popup {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            animation: popIn 0.5s ease;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .trophy {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: #f1c40f;
+        }
+
+        .score-display {
+            font-size: 3.5rem;
+            color: #27ae60;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-item {
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-item h3 {
+            color: #7f8c8d;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .stat-item p {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .performance-message {
+            font-size: 1.2rem;
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .excellent {
+            background: #d5f4e6;
+            color: #27ae60;
+            border-left: 4px solid #27ae60;
+        }
+
+        .good {
+            background: #fff9e6;
+            color: #f39c12;
+            border-left: 4px solid #f39c12;
+        }
+
+        .poor {
+            background: #fdeaea;
+            color: #e74c3c;
+            border-left: 4px solid #e74c3c;
+        }
+
+        .btn-retry {
+            background: #e74c3c;
+            color: white;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .btn-retry:hover {
+            background: #c0392b;
+        }
+
+        .btn-close {
+            background: #3498db;
+            color: white;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .btn-close:hover {
+            background: #2980b9;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .option {
+                padding: 15px;
+                font-size: 1rem;
+            }
+            
+            button {
+                padding: 12px 20px;
+                font-size: 1rem;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Anti-Doping Education Quiz</h1>
+            <p>Test your knowledge about anti-doping rules and regulations</p>
+            <div class="wada-logo">WADA</div>
+        </div>
+
+        <div class="quiz-container">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="progress-text">Question 1 of 20</span>
+                    <span id="score-text">Score: 0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress" id="progress"></div>
+                </div>
+            </div>
+
+            <div id="question-container">
+                <!-- Questions will be dynamically inserted here -->
+            </div>
+
+            <div class="navigation">
+                <button id="prev-btn" class="btn-prev" onclick="previousQuestion()" disabled>Previous</button>
+                <button id="next-btn" class="btn-next" onclick="nextQuestion()">Next Question</button>
+                <button id="submit-btn" class="btn-submit" onclick="submitQuiz()" style="display: none;">Submit Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Popup -->
+    <div class="popup-overlay" id="results-popup">
+        <div class="popup">
+            <div class="trophy">🏆</div>
+            <h2>Quiz Completed!</h2>
+            <div class="score-display" id="final-score">0%</div>
+            <div class="stats">
+                <div class="stat-item">
+                    <h3>Correct Answers</h3>
+                    <p id="correct-answers">0</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Total Questions</h3>
+                    <p id="total-questions">0</p>
+                </div>
+            </div>
+            <div class="performance-message" id="performance-message">
+                <!-- Performance message will be inserted here -->
+            </div>
+            <button class="btn-retry" onclick="retryQuiz()">Take Quiz Again</button>
+            <button class="btn-close" onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Quiz questions based on your training data
+        const quizQuestions = [
+            {
+                id: 1,
+                question: "I am ultimately responsible for what I swallow, inject or apply to my body.",
+                options: {
+                    a: "True",
+                    b: "False"
+                },
+                correctAnswer: "a",
+                explanation: "All athletes need to be proactive in asking questions so they don't jeopardize their sporting careers. If you have a question - ASK! If you cannot be 100% sure of the ingredients or don't know the status of a substance – DON'T TAKE IT!"
+            },
+            {
+                id: 2,
+                question: "Only athletes competing at the Olympics, Paralympics and World Championships are subject to doping control.",
+                options: {
+                    a: "True",
+                    b: "False"
+                },
+                correctAnswer: "b",
+                explanation: "Many countries and international federations have anti-doping programs. This means that if you are part of a national team, you may be tested either during a competition or outside competition at your home or training venue."
+            },
+            {
+                id: 3,
+                question: "WADA stands for:",
+                options: {
+                    a: "World Anti-Doping Administration",
+                    b: "World Anti-Doping Agency",
+                    c: "World Athletic Doping Association",
+                    d: "World Anti-Drugs Agency"
+                },
+                correctAnswer: "b",
+                explanation: "The mission of World Anti-Doping Agency (WADA) is to promote, coordinate and monitor at the international level the fight against doping in sport in all forms."
+            },
+            {
+                id: 4,
+                question: "If a medication is okay to use in my home country, I can safely use the same brand purchased overseas.",
+                options: {
+                    a: "True",
+                    b: "False"
+                },
+                correctAnswer: "b",
+                explanation: "Some medications have slightly different ingredients when bought in different countries. In some cases, these could be prohibited substances. You must check the ingredients carefully and seek advice from your doctor, if you are unsure."
+            },
+            {
+                id: 5,
+                question: "The maximum number of times an athlete can be tested each year is:",
+                options: {
+                    a: "2",
+                    b: "5",
+                    c: "20",
+                    d: "Unlimited"
+                },
+                correctAnswer: "d",
+                explanation: "There is no limit to the number of times an athlete can be tested each year including in-competition, out of competition, random and target testing."
+            },
+            {
+                id: 6,
+                question: "Analysis of urine for detection of prohibited substances or methods in sport can be performed by ANY laboratory with the necessary equipment.",
+                options: {
+                    a: "True",
+                    b: "False"
+                },
+                correctAnswer: "b",
+                explanation: "Analysis of urine for detection of prohibited substances or methods in sport is only performed at those laboratories which have met the high standards of WADA and have been granted accredited status."
+            },
+            {
+                id: 7,
+                question: "If a nutritional supplement is bought from a pharmacy (over-the-counter), it is definitely permitted in sport.",
+                options: {
+                    a: "True",
+                    b: "False"
+                },
+                correctAnswer: "b",
+                explanation: "Taking supplements and/or any substance is at your own risk. Many supplements contain prohibited substances. Because the supplement industry is not regulated in many countries, it is important to be completely confident you know what is inside the product."
+            },
+            {
+                id: 8,
+                question: "When I am sick, I can be excused for taking ANY medicine to help me get well.",
+                options: {
+                    a: "True",
+                    b: "False"
+                },
+                correctAnswer: "b",
+                explanation: "If you have a cold, flu or hay fever DO NOT take any medication or substance without first being sure it doesn't contain a prohibited substance. This includes both over-the-counter substances and medication from your doctor. Remember a positive test is a positive test."
+            },
+            {
+                id: 9,
+                question: "A coach or doctor assisting or encouraging an athlete to take prohibited substances can be sanctioned if that athlete tests positive.",
+                options: {
+                    a: "True",
+                    b: "False"
+                },
+                correctAnswer: "a",
+                explanation: "Encouraging or assisting athletes to use prohibited substances or methods is considered a serious doping violation and a sanction will be imposed under the World Anti-Doping Code."
+            },
+            {
+                id: 10,
+                question: "Doping Control Officers must inform athletes they will be drug tested a few hours before their arrival.",
+                options: {
+                    a: "True",
+                    b: "False"
+                },
+                correctAnswer: "b",
+                explanation: "Wherever possible, testing will be no-advance-notice. This means that Doping Control Officers (DCOs) can conduct testing at any time, and in any place. However, it is expected that DCOs will use their discretion so as not to cause unnecessary inconvenience to athletes."
+            },
+            {
+                id: 11,
+                question: "Once the sample is collected and sealed and the paperwork is complete, any attempt to open, contaminate or otherwise tamper with the sample will be obvious.",
+                options: {
+                    a: "True",
+                    b: "False"
+                },
+                correctAnswer: "a",
+                explanation: "An athlete should feel confident that their sample can not be tampered with. In addition, the laboratory will report any suspicions it has about the integrity of the sample before analysis."
+            },
+            {
+                id: 12,
+                question: "An athlete can refuse to submit to doping control if he/she is too busy.",
+                options: {
+                    a: "True",
+                    b: "False"
+                },
+                correctAnswer: "b",
+                explanation: "Refusing to submit to doping control can carry the same sanction as a positive test. If an athlete refuses to take a test when notified, he/she must provide an explanation for the refusal on the relevant form and inform his/her governing body as soon as possible."
+            },
+            {
+                id: 13,
+                question: "When requested, my coach can accompany me to the Doping Control Station.",
+                options: {
+                    a: "True",
+                    b: "False"
+                },
+                correctAnswer: "a",
+                explanation: "Every athlete has the right to have a representative accompany them to the Doping Control Station."
+            },
+            {
+                id: 14,
+                question: "I have to use the sample collection equipment I have chosen, even if I think it might have been tampered with or it looks dirty.",
+                options: {
+                    a: "True",
+                    b: "False"
+                },
+                correctAnswer: "b",
+                explanation: "You should be given a selection of sealed sample collection equipment to choose from. If you are not happy about the testing kit you originally chose, you should ask for another one and your request may be granted."
+            },
+            {
+                id: 15,
+                question: "I should tell my doctor that as an athlete I am subject to doping controls and should not use prohibited substances.",
+                options: {
+                    a: "True",
+                    b: "False"
+                },
+                correctAnswer: "a",
+                explanation: "It is important that your doctor knows you should be given alternative medications to those on the prohibited list. If this is not possible, you will need to ask for a Therapeutic Use Exemption (TUE) through your International Federation or National Anti-Doping Organization before you can use the medication."
+            },
+            {
+                id: 16,
+                question: "If you are not able to provide the required amount of urine you will be asked to give a blood test in addition to your urine.",
+                options: {
+                    a: "True",
+                    b: "False"
+                },
+                correctAnswer: "b",
+                explanation: "If you are unable to provide the required amount of urine, your partial sample will be sealed and recorded, and when ready, you will need to provide further samples until you have the required volume."
+            },
+            {
+                id: 17,
+                question: "It is always okay to accept medication from someone you trust, even if you don't know what the medication contains.",
+                options: {
+                    a: "True",
+                    b: "False"
+                },
+                correctAnswer: "b",
+                explanation: "Athletes should always know what they are putting into their system. Taking medication without knowing what it contains could result in a positive drug test and could also be dangerous to your health."
+            },
+            {
+                id: 18,
+                question: "If a Doping Control Officer comes to your home to conduct an out-of-competition test, it is okay for you to leave the room alone to make a cup of coffee.",
+                options: {
+                    a: "True",
+                    b: "False"
+                },
+                correctAnswer: "b",
+                explanation: "If you need to leave the room, tell the Doping Control Officer who will go with you. It is important that you protect the integrity of your sample by staying in full view of the Doping Control Officer at all times until the test is complete."
+            },
+            {
+                id: 19,
+                question: "If I have had an out of competition test already this week, it will be a few weeks before my next test.",
+                options: {
+                    a: "True",
+                    b: "False"
+                },
+                correctAnswer: "b",
+                explanation: "It may be a few weeks before your next test, or it could be a few days, even hours. There are benefits to conducting more than one test within a short time span since it stops cheats feeling they are 'safe' to continue cheating."
+            },
+            {
+                id: 20,
+                question: "If the Doping Control Officer (DCO) does not have any identification, I can refuse to be tested.",
+                options: {
+                    a: "True",
+                    b: "False"
+                },
+                correctAnswer: "a",
+                explanation: "The DCO must be able to demonstrate that they have the authority to conduct a test, and that they belong to an authorized sample collection authority. If they do not, explain this on the relevant form, sign it, keep your copy and contact your Federation immediately."
+            }
+        ];
+
+        // Quiz state
+        let currentQuestionIndex = 0;
+        let userAnswers = new Array(quizQuestions.length).fill(null);
+        let score = 0;
+
+        // Initialize quiz
+        function initializeQuiz() {
+            displayQuestion();
+            updateProgress();
+        }
+
+        // Display current question
+        function displayQuestion() {
+            const question = quizQuestions[currentQuestionIndex];
+            const container = document.getElementById('question-container');
+            
+            container.innerHTML = `
+                <div class="question-container">
+                    <div class="question-text">${question.question}</div>
+                    <div class="options-container" id="options-container">
+                        ${Object.entries(question.options).map(([key, value]) => `
+                            <div class="option ${userAnswers[currentQuestionIndex] === key ? 'selected' : ''}" 
+                                 onclick="selectOption('${key}')">
+                                <span class="option-letter">${key.toUpperCase()}</span>
+                                ${value}
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="explanation" id="explanation">
+                        <strong>Explanation:</strong> ${question.explanation}
+                    </div>
+                </div>
+            `;
+
+            updateNavigation();
+        }
+
+        // Select an option
+        function selectOption(optionKey) {
+            userAnswers[currentQuestionIndex] = optionKey;
+            displayQuestion();
+            updateScore();
+        }
+
+        // Update navigation buttons
+        function updateNavigation() {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const submitBtn = document.getElementById('submit-btn');
+
+            prevBtn.disabled = currentQuestionIndex === 0;
+            
+            if (currentQuestionIndex === quizQuestions.length - 1) {
+                nextBtn.style.display = 'none';
+                submitBtn.style.display = 'block';
+            } else {
+                nextBtn.style.display = 'block';
+                submitBtn.style.display = 'none';
+            }
+        }
+
+        // Update progress bar and text
+        function updateProgress() {
+            const progress = ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
+            document.getElementById('progress').style.width = `${progress}%`;
+            document.getElementById('progress-text').textContent = `Question ${currentQuestionIndex + 1} of ${quizQuestions.length}`;
+        }
+
+        // Update score display
+        function updateScore() {
+            let correctCount = 0;
+            for (let i = 0; i <= currentQuestionIndex; i++) {
+                if (userAnswers[i] === quizQuestions[i].correctAnswer) {
+                    correctCount++;
+                }
+            }
+            score = (correctCount / (currentQuestionIndex + 1)) * 100;
+            document.getElementById('score-text').textContent = `Score: ${score.toFixed(1)}%`;
+        }
+
+        // Navigate to previous question
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                displayQuestion();
+                updateProgress();
+            }
+        }
+
+        // Navigate to next question
+        function nextQuestion() {
+            if (currentQuestionIndex < quizQuestions.length - 1) {
+                currentQuestionIndex++;
+                displayQuestion();
+                updateProgress();
+            }
+        }
+
+        // Submit the quiz
+        function submitQuiz() {
+            // Calculate final score
+            let correctCount = 0;
+            quizQuestions.forEach((question, index) => {
+                if (userAnswers[index] === question.correctAnswer) {
+                    correctCount++;
+                }
+            });
+
+            const finalScore = (correctCount / quizQuestions.length) * 100;
+
+            // Show results popup
+            showResults(correctCount, quizQuestions.length, finalScore);
+        }
+
+        // Show results in popup
+        function showResults(correct, total, percentage) {
+            document.getElementById('final-score').textContent = `${percentage.toFixed(1)}%`;
+            document.getElementById('correct-answers').textContent = correct;
+            document.getElementById('total-questions').textContent = total;
+            
+            const messageElement = document.getElementById('performance-message');
+            let message = "";
+            let messageClass = "";
+            
+            if (percentage >= 90) {
+                message = "Outstanding! You have exceptional knowledge of anti-doping rules.";
+                messageClass = "excellent";
+            } else if (percentage >= 75) {
+                message = "Excellent! You have a strong understanding of anti-doping regulations.";
+                messageClass = "excellent";
+            } else if (percentage >= 60) {
+                message = "Good job! You have a solid foundation, but there's room for improvement.";
+                messageClass = "good";
+            } else {
+                message = "Keep learning! Review the training materials to improve your knowledge.";
+                messageClass = "poor";
+            }
+            
+            messageElement.textContent = message;
+            messageElement.className = `performance-message ${messageClass}`;
+            
+            document.getElementById('results-popup').style.display = 'flex';
+        }
+
+        // Close the popup
+        function closePopup() {
+            document.getElementById('results-popup').style.display = 'none';
+        }
+
+        // Retry the quiz
+        function retryQuiz() {
+            currentQuestionIndex = 0;
+            userAnswers = new Array(quizQuestions.length).fill(null);
+            score = 0;
+            displayQuestion();
+            updateProgress();
+            updateScore();
+            closePopup();
+        }
+
+        // Initialize quiz when page loads
+        document.addEventListener('DOMContentLoaded', initializeQuiz);
+    </script>
+</body>
+</html>
