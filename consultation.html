@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    </div>
+<script>
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+            {pageLanguage: 'en'},
+            'google_translate_element'
+        );
+    }
+</script>
+<script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>MediLab | Secure Video Consultations</title>
+    <!-- Google Fonts & simple CSS reset -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(145deg, #eef2f9 0%, #f9fbfe 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+        }
+
+        /* main consultation container */
+        .consultation-container {
+            max-width: 1320px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* header area */
+        .medilab-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .medilab-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(46, 125, 195, 0.12);
+            backdrop-filter: blur(2px);
+            padding: 0.5rem 1.4rem;
+            border-radius: 60px;
+            margin-bottom: 1.2rem;
+        }
+
+        .medilab-badge span {
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            color: #0b4f6c;
+            background: #ffffffcc;
+            padding: 4px 12px;
+            border-radius: 40px;
+        }
+
+        .medilab-icon {
+            font-size: 1.6rem;
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1a4d8c, #2c7ab1);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+            margin-bottom: 0.6rem;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            color: #2c3e50;
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 400;
+            background: #ffffffaa;
+            backdrop-filter: blur(4px);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            display: inline-block;
+        }
+
+        /* card grid */
+        .doctor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0 2.5rem;
+        }
+
+        /* consultation card */
+        .consult-card {
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(0px);
+            border-radius: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            border: 1px solid rgba(70, 130, 200, 0.2);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .consult-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 28px 40px -16px rgba(18, 52, 106, 0.2);
+            border-color: rgba(46, 125, 195, 0.5);
+        }
+
+        .card-media {
+            background: linear-gradient(120deg, #d4e3fd, #e9f0fc);
+            padding: 1.5rem 1rem 0.8rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .doc-avatar {
+            width: 96px;
+            height: 96px;
+            background: white;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 12px 18px -8px rgba(0,0,0,0.1);
+            font-size: 3rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+            border: 3px solid white;
+        }
+
+        .doc-specialty {
+            background: #2c7ab1;
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: white;
+            letter-spacing: 0.4px;
+        }
+
+        .card-content {
+            padding: 1.5rem 1.5rem 1.8rem;
+            flex: 1;
+        }
+
+        .doc-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a2c3e;
+            margin-bottom: 0.3rem;
+        }
+
+        .doc-title {
+            font-size: 0.85rem;
+            color: #4a627a;
+            margin-bottom: 1rem;
+            border-left: 3px solid #2c7ab1;
+            padding-left: 0.6rem;
+        }
+
+        .consult-detail {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin: 0.75rem 0;
+            font-size: 0.9rem;
+            color: #2c3e50;
+            background: #f5f9ff;
+            padding: 0.4rem 0.8rem;
+            border-radius: 40px;
+            width: fit-content;
+        }
+
+        .consult-detail span:first-child {
+            font-weight: 500;
+        }
+
+        .meet-badge {
+            background: #e9f0fa;
+            padding: 0.2rem 0.6rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #0f5b8c;
+        }
+
+        .btn-meet {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #1a73e8;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.8rem 1.4rem;
+            border-radius: 50px;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 1rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .btn-meet:hover {
+            background: #0c5fce;
+            transform: scale(0.98);
+            box-shadow: 0 8px 18px rgba(26,115,232,0.3);
+        }
+
+        .btn-meet i {
+            font-size: 1.2rem;
+            font-style: normal;
+            font-weight: normal;
+        }
+
+        /* disclaimer / information box */
+        .info-section {
+            background: #ffffffdd;
+            backdrop-filter: blur(8px);
+            border-radius: 2rem;
+            padding: 1.4rem 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.2rem;
+            margin-top: 1rem;
+            border: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        }
+
+        .security-note {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.85rem;
+            color: #1e4663;
+        }
+
+        .security-note span {
+            font-size: 1.4rem;
+        }
+
+        .gateway-note {
+            font-size: 0.8rem;
+            background: #f0f4fa;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            color: #1e5a7d;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.75rem;
+            color: #6a7c8f;
+            border-top: 1px solid #cfdfed;
+            padding-top: 1.5rem;
+        }
+
+        @media (max-width: 680px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            .consultation-container {
+                padding: 0;
+            }
+            .info-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            .btn-meet {
+                padding: 0.7rem 1rem;
+            }
+        }
+
+        /* custom tooltip style optional */
+        .consult-card .btn-meet:active {
+            transition: 0.05s;
+        }
+    </style>
+</head>
+<body>
+<div class="consultation-container">
+    <div class="medilab-header">
+        <div class="medilab-badge">
+            <div class="medilab-icon">🏥</div>
+            <span>MediLab · Virtual Care</span>
+        </div>
+        <h1>Live Video Consultation</h1>
+        <div class="tagline">Connect with top specialists via secure Google Meet gateway</div>
+    </div>
+
+    <!-- Grid of consultation cards, each provides a Google Meet link gateway -->
+    <div class="doctor-grid">
+        <!-- Doctor Card 1 - Dr. Sophia bannerjee (Cardiology) -->
+        <div class="consult-card">
+            <div class="card-media">
+                <div class="doc-avatar">👩‍⚕️</div>
+                <div class="doc-specialty">❤️ CARDIOLOGY</div>
+            </div>
+            <div class="card-content">
+                <div class="doc-name">Dr. Sophia bannerjee</div>
+                <div class="doc-title">Interventional Cardiologist · 12+ years</div>
+                <div class="consult-detail">
+                    <span>📅</span> <span>Today · 3:30 PM IST</span>
+                </div>
+                <div class="consult-detail">
+                    <span>🔗</span> <span class="meet-badge">Google Meet gateway</span>
+                </div>
+                <a href="https://meet.google.com/osm-vnxg-chh" class="btn-meet" target="_blank" rel="noopener noreferrer">
+                    🎥 Join Video Consultation →
+                </a>
+                <div style="font-size: 0.7rem; margin-top: 12px; color: #5c6f87; text-align: center;">
+                    Secure encrypted session
+                </div>
+            </div>
+        </div>
+
+        <!-- Doctor Card 2 - Dr. James Okafor (Neurology) -->
+        <div class="consult-card">
+            <div class="card-media">
+                <div class="doc-avatar">🧠</div>
+                <div class="doc-specialty">🧬 NEUROLOGY</div>
+            </div>
+            <div class="card-content">
+                <div class="doc-name">Dr. Jamal basu</div>
+                <div class="doc-title">Stroke & Headache Specialist · 9+ years</div>
+                <div class="consult-detail">
+                    <span>📅</span> <span>Today · 5:00 PM IST</span>
+                </div>
+                <div class="consult-detail">
+                    <span>🔗</span> <span class="meet-badge">Google Meet gateway</span>
+                </div>
+                <a href="https://meet.google.com/avx-ahkq-jqi" class="btn-meet" target="_blank" rel="noopener noreferrer">
+                    🎥 Join Video Consultation →
+                </a>
+                <div style="font-size: 0.7rem; margin-top: 12px; color: #5c6f87; text-align: center;">
+                    Instant gateway · no account required
+                </div>
+            </div>
+        </div>
+
+        <!-- Doctor Card 3 - Dr. Meera Krishnamoorthy (Pediatrics) -->
+        <div class="consult-card">
+            <div class="card-media">
+                <div class="doc-avatar">👶</div>
+                <div class="doc-specialty">🍼 PEDIATRICS</div>
+            </div>
+            <div class="card-content">
+                <div class="doc-name">Dr. Meera Krish</div>
+                <div class="doc-title">Child Health & Development · 15+ years</div>
+                <div class="consult-detail">
+                    <span>📅</span> <span>Tomorrow · 10:30 AM IST</span>
+                </div>
+                <div class="consult-detail">
+                    <span>🔗</span> <span class="meet-badge">Google Meet gateway</span>
+                </div>
+                <a href="https://meet.google.com/ing-pmcy-ahj" class="btn-meet" target="_blank" rel="noopener noreferrer">
+                    🎥 Join Video Consultation →
+                </a>
+                <div style="font-size: 0.7rem; margin-top: 12px; color: #5c6f87; text-align: center;">
+                    Parent-friendly session
+                </div>
+            </div>
+        </div>
+
+        <!-- Doctor Card 4 - Dr. Anil Sharma (Dermatology) extra specialist -->
+        <div class="consult-card">
+            <div class="card-media">
+                <div class="doc-avatar">🧴</div>
+                <div class="doc-specialty">✨ DERMATOLOGY</div>
+            </div>
+            <div class="card-content">
+                <div class="doc-name">Dr. Anil Sharma</div>
+                <div class="doc-title">Cosmetic & Medical Derm · 11+ years</div>
+                <div class="consult-detail">
+                    <span>📅</span> <span>Tomorrow · 2:00 PM IST</span>
+                </div>
+                <div class="consult-detail">
+                    <span>🔗</span> <span class="meet-badge">Google Meet gateway</span>
+                </div>
+                <a href="https://meet.google.com/ing-pmcy-ahj" class="btn-meet" target="_blank" rel="noopener noreferrer">
+                    🎥 Join Video Consultation →
+                </a>
+                <div style="font-size: 0.7rem; margin-top: 12px; color: #5c6f87; text-align: center;">
+                    skin & hair consultation
+                </div>
+            </div>
+        </div>
+
+        <!-- Doctor Card 5 - Dr. Emily Zhao (General Medicine) -->
+        <div class="consult-card">
+            <div class="card-media">
+                <div class="doc-avatar">🩺</div>
+                <div class="doc-specialty">🏥 GENERAL MEDICINE</div>
+            </div>
+            <div class="card-content">
+                <div class="doc-name">Dr. Emily Zhao</div>
+                <div class="doc-title">Internal Medicine · 8+ years</div>
+                <div class="consult-detail">
+                    <span>📅</span> <span>Fri, 24 Apr · 9:00 AM IST</span>
+                </div>
+                <div class="consult-detail">
+                    <span>🔗</span> <span class="meet-badge">Google Meet gateway</span>
+                </div>
+                <a href="https://meet.google.com/ing-pmcy-ahj" class="btn-meet" target="_blank" rel="noopener noreferrer">
+                    🎥 Join Video Consultation →
+                </a>
+                <div style="font-size: 0.7rem; margin-top: 12px; color: #5c6f87; text-align: center;">
+                    Routine & preventive care
+                </div>
+            </div>
+        </div>
+
+        <!-- Doctor Card 6 - Dr. Rajiv Menon (Orthopedics) -->
+        <div class="consult-card">
+            <div class="card-media">
+                <div class="doc-avatar">🦴</div>
+                <div class="doc-specialty">⚕️ ORTHOPEDICS</div>
+            </div>
+            <div class="card-content">
+                <div class="doc-name">Dr. Rajiv Menon</div>
+                <div class="doc-title">Joint Replacement Specialist · 14+ years</div>
+                <div class="consult-detail">
+                    <span>📅</span> <span>Fri, 24 Apr · 4:30 PM IST</span>
+                </div>
+                <div class="consult-detail">
+                    <span>🔗</span> <span class="meet-badge">Google Meet gateway</span>
+                </div>
+                <a href="https://meet.google.com/ing-pmcy-ahj" class="btn-meet" target="_blank" rel="noopener noreferrer">
+                    🎥 Join Video Consultation →
+                </a>
+                <div style="font-size: 0.7rem; margin-top: 12px; color: #5c6f87; text-align: center;">
+                    Post-op & motion assessment
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- information and gateway explanation -->
+    <div class="info-section">
+        <div class="security-note">
+            <span>🔒</span> <strong>HIPAA & GDPR ready gateway</strong> — All sessions routed through Google Meet infrastructure.
+        </div>
+        <div class="gateway-note">
+            ⚡ One-click access: Each card provides a unique <strong>Google Meet link</strong>. Click to enter virtual waiting room.
+        </div>
+        <div class="security-note">
+            <span>🕒</span> 24/7 reschedule support · instant meet links
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 MediLab — Virtual consultation platform. All video sessions are encrypted. Google Meet acts as secure third-party gateway.  
+        <br>For emergencies, please contact local health services.</p>
+    </footer>
+</div>
+
+<!-- optional micro-interaction: add a small console note but not intrusive -->
+</body>
+</html>
