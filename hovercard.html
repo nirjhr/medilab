@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <div id="google_translate_element"></div>
+<script>
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+            {pageLanguage: 'en'},
+            'google_translate_element'
+        );
+    }
+</script>
+<script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>MediLab Anti-Doping Hub | Clean Sport Education</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', 'Arial', 'Helvetica', sans-serif;
+      background: linear-gradient(145deg, #f0f7ff 0%, #e9f0fa 100%);
+      padding: 2rem 1.5rem;
+      color: #1a2c3e;
+    }
+
+    /* header / hero */
+    .hero {
+      text-align: center;
+      max-width: 1000px;
+      margin: 0 auto 2.5rem auto;
+    }
+
+    .badge {
+      background: #1e5a7d;
+      color: white;
+      display: inline-block;
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #0b4f6c, #2980b9, #1e88e5);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 0.75rem;
+    }
+
+    .subhead {
+      font-size: 1.1rem;
+      color: #2c5282;
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(4px);
+      display: inline-block;
+      padding: 0.4rem 1.5rem;
+      border-radius: 60px;
+    }
+
+    /* section styles */
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 2.5rem 0 1.5rem 0;
+      padding-left: 1rem;
+      border-left: 6px solid #2980b9;
+      color: #0b3b4f;
+    }
+
+    .card-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin: 1.5rem 0;
+    }
+
+    /* modern flip card container */
+    .flip-card {
+      background-color: transparent;
+      width: 320px;
+      height: 380px;
+      perspective: 1400px;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+      transform-style: preserve-3d;
+      border-radius: 28px;
+      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.15);
+    }
+
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    /* front & back styling */
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 28px;
+      overflow-y: auto;
+      padding: 1.4rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      scrollbar-width: thin;
+    }
+
+    /* custom scroll for back if content overflows */
+    .flip-card-back::-webkit-scrollbar {
+      width: 4px;
+    }
+    .flip-card-back::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.2);
+      border-radius: 10px;
+    }
+    .flip-card-back::-webkit-scrollbar-thumb {
+      background: rgba(0,0,0,0.3);
+      border-radius: 10px;
+    }
+
+    /* front: modern gradient + icon image placeholder */
+    .flip-card-front {
+      background: linear-gradient(145deg, #ffffff, #f3f9ff);
+      border: 1px solid rgba(46, 125, 195, 0.3);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.6);
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+    }
+
+    .card-icon {
+      font-size: 3.5rem;
+      background: #eef2fc;
+      width: 85px;
+      height: 85px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      margin-bottom: 0.5rem;
+      box-shadow: 0 8px 14px rgba(0,0,0,0.05);
+    }
+
+    .flip-card-front h3 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #1a4d8c;
+      margin-top: 0.5rem;
+    }
+
+    .flip-card-front p {
+      font-size: 0.85rem;
+      color: #4a627a;
+      font-weight: 500;
+      background: #e9f0fa;
+      padding: 0.2rem 1rem;
+      border-radius: 50px;
+    }
+
+    /* back side: anti doping info */
+    .flip-card-back {
+      background: linear-gradient(135deg, #1a2c3e, #1a4d6b);
+      color: white;
+      transform: rotateY(180deg);
+      text-align: left;
+      justify-content: flex-start;
+      gap: 0.7rem;
+      font-weight: 500;
+    }
+
+    .flip-card-back h2 {
+      font-size: 1.5rem;
+      border-bottom: 2px solid #5dade2;
+      display: inline-block;
+      margin-bottom: 0.6rem;
+      font-weight: 700;
+    }
+
+    .flip-card-back ul, .flip-card-back p {
+      font-size: 0.8rem;
+      line-height: 1.4;
+      margin: 0.4rem 0;
+      padding-left: 0.2rem;
+    }
+
+    .flip-card-back li {
+      margin-left: 1rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .rule-badge {
+      background: rgba(255,215,0,0.2);
+      padding: 0.2rem 0.5rem;
+      border-radius: 18px;
+      font-size: 0.7rem;
+      font-weight: bold;
+      width: fit-content;
+    }
+
+    /* specific sport card extra style */
+    .sport-card .flip-card-front {
+      background: linear-gradient(145deg, #fff6e8, #fff0e0);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 1.5rem;
+      font-size: 0.75rem;
+      background: #ffffffc9;
+      border-radius: 50px;
+      color: #2c5282;
+      backdrop-filter: blur(4px);
+    }
+
+    @media (max-width: 700px) {
+      body {
+        padding: 1rem;
+      }
+      h1 {
+        font-size: 1.8rem;
+      }
+      .flip-card {
+        width: 280px;
+        height: 360px;
+      }
+      .section-title {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="badge">⚕️ MEDILAB ANTI‑DOPING INITIATIVE</div>
+  <h1>🧪 Clean Sport • Fair Play • Integrity</h1>
+  <div class="subhead">📘 Hover over any card — get instant WADA/NADA guidelines for athletes, staff & sports</div>
+</div>
+
+<!-- ================= SECTION 1: ATHLETES + COACHES + SUPPORT STAFF ================= -->
+<div class="section-title">👥 For Athletes, Coaches & Support Staff — Do's & Don'ts</div>
+<div class="card-grid">
+  
+  <!-- CARD 1 : ATHLETE -->
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <div class="card-icon">🏃‍♂️⚡</div>
+        <h3>Athlete</h3>
+        <p>strict liability · your body, your responsibility</p>
+      </div>
+      <div class="flip-card-back">
+        <h2>✅ ATHLETE DO's</h2>
+        <ul>
+          <li>Know WADA Prohibited List & update annually.</li>
+          <li>Check every medication/ supplement via Global DRO.</li>
+          <li>Apply for TUE before using banned substance (if medical need).</li>
+          <li>Cooperate with sample collection anytime.</li>
+          <li>Use only batch-tested supplements (Informed Sport).</li>
+        </ul>
+        <div class="rule-badge">‼️ STRICT LIABILITY</div>
+        <h2 style="margin-top: 0.6rem;">❌ DON'Ts</h2>
+        <ul>
+          <li>Never assume "natural" is safe.</li>
+          <li>Don't share or accept unknown products.</li>
+          <li>Don't refuse/miss doping tests.</li>
+          <li>Never tamper with sample or whereabouts.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 2 : COACH -->
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <div class="card-icon">📋🧠</div>
+        <h3>Coach</h3>
+        <p>mentor · role model · educator</p>
+      </div>
+      <div class="flip-card-back">
+        <h2>✅ COACH DO's</h2>
+        <ul>
+          <li>Teach anti-doping rules & values to athletes.</li>
+          <li>Verify all team medications/supplements.</li>
+          <li>Promote food-first nutrition over risky supplements.</li>
+          <li>Complete WADA ADEL for coaches.</li>
+          <li>Report suspicious doping behavior to NADO.</li>
+        </ul>
+        <h2>❌ DON'Ts</h2>
+        <ul>
+          <li>Don't force “win at all costs” culture.</li>
+          <li>Never administer/possess prohibited substances.</li>
+          <li>Don't associate with banned personnel.</li>
+          <li>No covering up violations.</li>
+        </ul>
+        <div class="rule-badge">7/11 ADRVs apply to support staff</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 3 : SUPPORT STAFF (MEDICAL / NUTRITION) -->
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <div class="card-icon">🩺🍎</div>
+        <h3>Support Staff</h3>
+        <p>doctors, physios, dietitians</p>
+      </div>
+      <div class="flip-card-back">
+        <h2>✅ SUPPORT DO's</h2>
+        <ul>
+          <li>Prescribe only non-prohibited alternatives.</li>
+          <li>Assist athletes with TUE applications.</li>
+          <li>Stay updated on Prohibited List (Jan 1).</li>
+          <li>Promote supplement risk awareness.</li>
+          <li>Honest communication with anti-doping orgs.</li>
+        </ul>
+        <h2>❌ DON'Ts</h2>
+        <ul>
+          <li>No banned substance prescription without TUE.</li>
+          <li>Don't recommend unverified supplements.</li>
+          <li>Never traffic or possess prohibited items.</li>
+          <li>Don't ignore contamination risks in supplements.</li>
+        </ul>
+        <p>🔔 NADO: Medical professionals can face bans too!</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= SECTION 2 : HIGH-RISK SUPPLEMENTS / BANNED SUBSTANCES ================= -->
+<div class="section-title">⚠️ Banned Supplements & Hidden Threats (WADA/NADA alert)</div>
+<div class="card-grid">
+  <!-- Pre-workout risk -->
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <div class="card-icon">⚡🧪</div>
+        <h3>Pre-workouts</h3>
+        <p>high contamination risk</p>
+      </div>
+      <div class="flip-card-back">
+        <h2>🚫 Hidden Stimulants</h2>
+        <p>Flmodafinil, Fladrafinil, DMAA, Amphetamine analogs often found.</p>
+        <div class="rule-badge">PERMANENTLY BANNED</div>
+        <p>⚠️ Even "legal high" labels may contain WADA S6 stimulants → positive test. Avoid unless batch-certified.</p>
+        <p><strong>✅ Safer alternative:</strong> Caffeine within limits (urine <12μg/mL).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fat Burners / SARMs -->
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <div class="card-icon">🔥💊</div>
+        <h3>Fat Burners & SARMs</h3>
+        <p>"test boosters" danger</p>
+      </div>
+      <div class="flip-card-back">
+        <h2>❌ Banned Anabolics</h2>
+        <p>SARMs (Ostarine, RAD140), BAM15, Aromatase inhibitors.</p>
+        <div class="rule-badge">S1 / S4 PROHIBITED</div>
+        <p>These damage health + long bans up to 4 years. Many "natural" boosters contaminated.</p>
+        <p>🏥 NADA advisory: zero supplement likely 100% risk-free.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Protein / recovery cross-contamination -->
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <div class="card-icon">🥤🧬</div>
+        <h3>Protein/BCAAs</h3>
+        <p>cross-contamination</p>
+      </div>
+      <div class="flip-card-back">
+        <h2>⚠️ Steroid Cross-Contamination</h2>
+        <p>Anabolic steroids or clenbuterol traces found in some powders.</p>
+        <p>✅ Only use brands with "Informed Sport" / "Kölner Liste" seal.</p>
+        <p>📌 WADA: manufacturing defaults can cause inadvertent positives.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= SECTION 3 : SPORT-SPECIFIC ANTI-DOPING REGULATIONS ================= -->
+<div class="section-title">🏅 Sport‑Specific Regulations — Banned methods / substances by discipline</div>
+<div class="card-grid">
+
+  <!-- Endurance sports (cycling / marathon / triathlon) -->
+  <div class="flip-card sport-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <div class="card-icon">🚴‍♂️🏃‍♀️</div>
+        <h3>Endurance Sports</h3>
+        <p>Cycling · Marathon · Triathlon</p>
+      </div>
+      <div class="flip-card-back">
+        <h2>🚫 Banned: EPO, Blood Doping, CO rebreathing</h2>
+        <p>▪️ EPO & EPO mimetics (Pegmolesatide) → permanently banned.<br>
+        ▪️ Carbon monoxide inhalation (non-diagnostic) → prohibited method.<br>
+        ▪️ Blood transfusion or withdrawal/reinfusion → <strong>4-year ban</strong>.<br>
+        ▪️ Salmeterol > allowed dose (100μg/8h) → violation.</p>
+        <div class="rule-badge">WADA PROHIBITED LIST S2, M1, M2</div>
+        <p>💡 Always check your asthma meds: TUE needed for high-dose beta-2 agonists.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Strength & Power sports (weightlifting, sprint, wrestling) -->
+  <div class="flip-card sport-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <div class="card-icon">🏋️‍♂️💪</div>
+        <h3>Strength & Power</h3>
+        <p>Weightlifting · Sprint · Wrestling</p>
+      </div>
+      <div class="flip-card-back">
+        <h2>⚡ Anabolic Agents & SARMs</h2>
+        <p>▪️ All anabolic androgenic steroids (AAS) → <strong>S1 Ban</strong>.<br>
+        ▪️ SARMs (Ostarine, Ligandrol, RAD140) → severe bans.<br>
+        ▪️ BAM15 (mitochondrial uncoupler) classified as metabolic modulator.<br>
+        ▪️ Gene doping / myostatin inhibitors prohibited.</p>
+        <p>🔹 NADA India: most supplement contamination from this category.</p>
+        <div class="rule-badge">PERMANENT PROHIBITION</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Team & Ball sports (football, cricket, basketball) -->
+  <div class="flip-card sport-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <div class="card-icon">⚽🏀🏏</div>
+        <h3>Team / Ball Sports</h3>
+        <p>Football · Cricket · Basketball</p>
+      </div>
+      <div class="flip-card-back">
+        <h2>🎯 Stimulants & Glucocorticoids</h2>
+        <p>▪️ Stimulants (Flmodafinil, cocaine, amphetamine) → in‑competition only ban.<br>
+        ▪️ Glucocorticoids: systemic injections or sustained-release Depo forms forbidden in competition.<br>
+        ▪️ Diuretics (masking agents) banned at all times.<br>
+        ▪️ Marijuana (cannabinoids) – has thresholds, but competition prohibited.</p>
+        <p>❗ Match day: beware of cold meds containing pseudoephedrine ( over limit ).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Precision sports (archery, shooting, golf) -->
+  <div class="flip-card sport-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <div class="card-icon">🎯🏌️‍♀️</div>
+        <h3>Precision Sports</h3>
+        <p>Archery · Shooting · Golf · Darts</p>
+      </div>
+      <div class="flip-card-back">
+        <h2>🧘 Beta-Blockers Prohibited in Competition</h2>
+        <p>▪️ Beta-blockers (Propranolol, Metoprolol, Atenolol) → S9 class: banned in-competition for precision sports.<br>
+        ▪️ Alcohol may be prohibited by some federations (WADA monitoring program).<br>
+        ▪️ Flmodafinil (stimulant) also banned for focus enhancement in competition.</p>
+        <div class="rule-badge">WADA S9 / S6</div>
+        <p>✅ No beta-blockers on match day unless valid TUE for cardiovascular condition.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Combat sports (judo, boxing, MMA, taekwondo) -->
+  <div class="flip-card sport-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <div class="card-icon">🥋🥊</div>
+        <h3>Combat Sports</h3>
+        <p>Boxing · Judo · MMA · Wrestling</p>
+      </div>
+      <div class="flip-card-back">
+        <h2>⚖️ Diuretics & Rapid Weight Loss Ban</h2>
+        <p>▪️ Diuretics & masking agents (S5) → banned all times, especially pre‑weigh‑in.<br>
+        ▪️ Anabolic agents for strength advantage → severe sanctions.<br>
+        ▪️ Stimulants (amphetamine type) increase aggression and pain tolerance → competition ban.<br>
+        ▪️ Glycerol (plasma expander) prohibited.</p>
+        <p>📢 NADA: weight manipulation using diuretics leads to health risks + 4-year suspension.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Winter / extreme sports and special mention -->
+  <div class="flip-card sport-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <div class="card-icon">⛷️❄️</div>
+        <h3>Winter Sports</h3>
+        <p>Alpine Ski · Biathlon · Snowboard</p>
+      </div>
+      <div class="flip-card-back">
+        <h2>🥶 Blood Doping & Hormones</h2>
+        <p>▪️ EPO, blood manipulation, and altitude simulation via CO rebreathing banned.<br>
+        ▪️ Glucocorticoids: injectable forms restricted in competition.<br>
+        ▪️ Beta‑2 agonists (formoterol) high dose needs TUE.<br>
+        ▪️ Alcohol is prohibited in biathlon during competition (federation rule).</p>
+        <div class="rule-badge">WADA PROHIBITED LIST ALWAYS UPDATED</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXTRA GUIDANCE BOX: TUE, WHEREABOUTS, RESOURCES -->
+<div style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-between; background: #ffffffcc; backdrop-filter: blur(12px); border-radius: 2rem; padding: 1.5rem; margin: 2rem 0; border: 1px solid #bed9ff;">
+  <div style="flex:1; min-width: 200px;">
+    <h3 style="color:#0b4f6c;">📌 Therapeutic Use Exemption (TUE)</h3>
+    <p style="font-size:0.85rem;">If you need a prohibited substance for a valid medical condition, <strong>apply for a TUE before</strong> competing. NADA / International Federation must approve.</p>
+  </div>
+  <div style="flex:1; min-width: 200px;">
+    <h3 style="color:#0b4f6c;">📍 Whereabouts & Testing</h3>
+    <p style="font-size:0.85rem;">Registered Testing Pool athletes: update 60-min time slot daily. 3 missed tests/filing failures in 12 months = violation.</p>
+  </div>
+  <div style="flex:1; min-width: 200px;">
+    <h3 style="color:#0b4f6c;">📖 RELIABLE RESOURCES</h3>
+    <p style="font-size:0.85rem;">▪️ WADA Prohibited List (wada-ama.org)<br>▪️ NADA India (nadaindia.yas.gov.in)<br>▪️ Global DRO (check meds)</p>
+  </div>
+</div>
+
+<div class="hero" style="margin-top: 0.5rem;">
+  <div class="subhead" style="background:#1a4d8c; color:white;">⚕️ Medilab Anti-Doping Education — knowledge protects your career ⚕️</div>
+</div>
+
+<footer>
+  <p>© 2025 MediLab — Information based on WADA Code & NADA India guidelines 2025/2026. This page is for awareness only. Always consult your NADO for case-specific rulings. <br> 🧪 Clean sport starts with you: Don't risk, don't cheat, don't ignore.</p>
+</footer>
+
+</body>
+</html>
